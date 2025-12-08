@@ -1,0 +1,13 @@
+title = "Gitleaks Configuration"
+
+[allowlist]
+description = "Allowlist for false positives"
+paths = [
+  '''(^|/)\.gitleaks\.toml$''',
+]
+
+# Ignorer les secrets de test (patterns)
+regexes = [
+  '''EXAMPLE_.*''',
+  '''TEST_SECRET''',
+]
