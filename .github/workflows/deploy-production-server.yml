@@ -44,4 +44,4 @@ jobs:
             docker image prune -af --filter "until=24h"
       - name: Verify deployment
         run: |
-          curl -f http://localhost:${{ secrets.DEPLOY_SERVER }}/actuator/health
+          curl -f http://localhost:${{ secrets.DEPLOY_APPLI_PORT }}/actuator/health
