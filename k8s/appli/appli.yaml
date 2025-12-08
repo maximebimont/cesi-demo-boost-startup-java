@@ -24,7 +24,7 @@ spec:
     spec:
       containers:
         - name: cesi6-demo-java
-          image: cesi6nzat/cesi6-demo-java:c58d8177acfad8c20e751bd0944ef875d18fad20
+          image: maxbmt/cesi6-demo-boost-startup:7811be3f96ddce9ea34c131c2ab0da42d574c6e2
           ports:
             - containerPort: 8080
               name: http
