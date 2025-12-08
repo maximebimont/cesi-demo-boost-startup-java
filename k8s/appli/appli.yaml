@@ -13,7 +13,7 @@ metadata:
   labels:
     app: cesi6-demo-java
 spec:
-  replicas: 3
+  replicas: 4
   selector:
     matchLabels:
       app: cesi6-demo-java
