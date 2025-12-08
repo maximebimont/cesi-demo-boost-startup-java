@@ -81,3 +81,10 @@ jobs:
     needs: [build-and-scan-docker]
     uses: ./.github/workflows/publish-docker-hub.yml
     secrets: inherit
+  # ═══════════════════════════════════════════════
+  # ÉTAPE 9 : DÉPLOIEMENT EN PRODUCTION
+  # ═══════════════════════════════════════════════
+  deploy-docker:
+    needs: dast-dynamic-security-testing
+    uses: ./.github/workflows/deploy-docker.yml
+    secrets: inherit
