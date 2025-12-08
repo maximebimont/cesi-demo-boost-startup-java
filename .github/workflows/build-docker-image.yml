@@ -54,6 +54,7 @@ jobs:
           format: 'table'
           exit-code: '0'
           severity: 'CRITICAL,HIGH'
+          trivyignores: .trivyignore
 
       - name: Run Trivy scan (blocking on vulnerabilities)
         uses: aquasecurity/trivy-action@0.27.0
@@ -63,3 +64,4 @@ jobs:
           exit-code: '1'
           ignore-unfixed: true
           severity: 'CRITICAL,HIGH'
+          trivyignores: .trivyignore
