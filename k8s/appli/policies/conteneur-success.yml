@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-secure
+  namespace: cesi6  # ⚠️ REMPLACEZ par votre namespace !
+  labels:
+    app: nginx-secure
+    test: "validation-success"
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nginx-secure
+  template:
+    metadata:
+      labels:
+        app: nginx-secure
+    spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 101
+        fsGroup: 101
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+      - name: nginx
+        image: nginx:1.25
+        ports:
+        - containerPort: 8080
+          name: http
+        resources:
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
+          requests:
+            cpu: "250m"
+            memory: "256Mi"
+        securityContext:
+          allowPrivilegeEscalation: false
+          runAsNonRoot: true
+          runAsUser: 101
+          readOnlyRootFilesystem: true
+          capabilities:
+            drop:
+            - ALL
+        volumeMounts:
+        - name: cache
+          mountPath: /var/cache/nginx
+        - name: run
+          mountPath: /var/run
+        - name: tmp
+          mountPath: /tmp
+      volumes:
+      - name: cache
+        emptyDir: {}
+      - name: run
+        emptyDir: {}
+      - name: tmp
+        emptyDir: {}

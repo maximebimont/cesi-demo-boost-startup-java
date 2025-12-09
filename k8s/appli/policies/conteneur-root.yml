@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-as-root
+  namespace: cesi6  # ⚠️ REMPLACEZ par votre namespace !
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx-as-root
+  template:
+    metadata:
+      labels:
+        app: nginx-as-root
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.25
+        resources:
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
+          requests:
+            cpu: "250m"
+            memory: "256Mi"
+        securityContext:
+          runAsUser: 0  # ❌ VIOLATION : root user (UID 0)

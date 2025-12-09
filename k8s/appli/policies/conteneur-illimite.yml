@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-no-limits
+  namespace: cesi6  # ⚠️ REMPLACEZ par votre namespace !
+  labels:
+    test: "validation-no-limits"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx-no-limits
+  template:
+    metadata:
+      labels:
+        app: nginx-no-limits
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.25
+        # ❌ VIOLATION : pas de resources.limits ni requests
